@@ -1,0 +1,36 @@
+------------------------
+SIAC Batch
+------------------------
+
+Funzionalità rilasciate
+--------------------------
+build 27/11/2019 versione 4.5.0
+ SIAC-6881
+
+build 29/05/2019 versione 4.4.0
+ SIAC-6587
+
+build 23/01/2019 versione 4.3.0
+ SIAC-6347
+
+build 11/01/2019 versione 4.2.0
+ SIAC-6347
+ 
+build 03/01/2019 versione 4.1.0
+ conf
+
+build 24/10/2018 versione 4.0.0
+  incremento versione per modifiche architettura
+ 
+build 11/01/2018 versione 3.4.0
+ SIAC-5761
+
+build 04/01/2018 versione 3.3.0
+ SIAC-5505
+
+build 21/12/2017 versione 3.2.0
+ SIAC-5480
+
+build 16/11/2017 versione 3.1.0
+ SIAC-5515
+

@@ -1,0 +1,22 @@
+# home di siacbatch
+MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
+JAVA_HOME=${vm.java_home.path}
+
+# setup delle variabili
+CODICE_LINEA_CLIENTE=$1
+FLUSSOELABMIFID=$2
+CODICE_ENTE=$3
+FOLDER=$4
+NOMEFILEMIF=$5
+LIMITE_ORDINATIVI=$6
+
+mkdir -p $FOLDER
+
+$JAVA_HOME/bin/java -cp .:$MYHOME/config/$CODICE_LINEA_CLIENTE:$MYHOME/lib/siacbatch.jar    \
+        it.csi.siac.siacbatch.main.SiacBatchLauncher \
+   --batch OIL                                                        \
+   --id_elaborazione $FLUSSOELABMIFID                                 \
+   --codice_ente $CODICE_ENTE                                        \
+   --path $FOLDER                                                     \
+   --xml $NOMEFILEMIF                                                 \
+   --limite_ordinativi $LIMITE_ORDINATIVI

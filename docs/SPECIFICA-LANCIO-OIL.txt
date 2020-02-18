@@ -1,0 +1,29 @@
+la trasfomazione pentaho dell'oil richiama lo script shell 
+
+conf\layout\bin\run-oil.sh 
+
+con 6 parametri, tra cui anche:
+- codice ente
+- codice linea cliente (INT-01, COTO-01,RP-01,CMTO-01) che mi serve per puntare alla connessione DB specifica della linea cliente
+
+run-oil.sh dovrà costruire un comando di lancio del batch java dinamicamente, sulla linea cliente
+
+java -cp .:<path_install_batch>/config/<linea_cliente>:.:<path_install_batch>/lib/siacbatch.jar  it.csi.siac.siacbatch.main.SiacBatchLauncher
+
+
+NOTA: in presenza di un solo ente, MULT, il parametro codice macro ente non era necessario, in quanto tutti gli enti gestiti facevano capo allo stesso DB
+
+composizione del TAR:
+|-lib => tutti i jar che servono, compreso il siacbatch.jar
+
+|-config => con tante cartelle quanti sono i macro enti (quattro), ciascuna contiene il file datasource.properties con i parametri di connessione al proprio db
+
+esempio: /config/INT-01/datasource.properties
+
+|-bin => con dentro il contenuto della cartelle sorgenti conf\layout\bin
+
+impatto sui chiamanti:
+- ETL pentaho run-oil*
+- job scheduler per abicab e pcc
+
+Tutti i chiamanti, all'avvio di una nuova linea cliente, dovranno essere allineati per passare in più il parametro linea cliente

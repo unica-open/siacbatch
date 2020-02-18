@@ -1,0 +1,32 @@
+name*,version*,license*,vendor/community,end-of-support,dependencies,language
+aopalliance,1.0.0,Public Domain,,,,java
+commons-cli,1.2,Apache 2.0,,,,java
+commons-collections,3.2.1,Apache 2.0,,,,java
+commons-dbcp,1.2.2,Apache 2.0,,,,java
+commons-io,2.1,Apache 2.0,,,,java
+commons-lang,2.6,Apache 2.0,,,,java
+commons-lang3,3.1,Apache 2.0,,,,java
+commons-logging,1.1.1,Apache 2.0,,,,java
+commons-pool,1.5.2,Apache 2.0,,,,java
+hibernate-jpa-2.0-api,1.0.1.Final-redhat-1,EPL 1.0,,,,java
+httpclient,4.5.2,Apache 2.0,,,,java
+httpclient-cache,4.5.2,Apache 2.0,,,,java
+httpclient-win,4.5.2,Apache 2.0,,,,java
+httpcore,4.4.4,Apache 2.0,,,,java
+httpmime,4.5.2,Apache 2.0,,,,java
+jackson-all,1.9.8,Apache 2.0,,,,java
+junit,4.12,EPL 1.0,,,,java
+log4j,1.2.15,Apache 2.0,,,,java
+postgresql,9.4-1201.jdbc4,POSTGRESQL,,,,java
+spring-aop,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-asm,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-beans,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-context,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-core,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-data-commons-core,1.4.0.RELEASE,Apache 2.0,,,,java
+spring-expression,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-jdbc,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-orm,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-tx,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-web,3.1.1.RELEASE,Apache 2.0,,,,java
+spring-webmvc,3.1.1.RELEASE,Apache 2.0,,,,java

@@ -1,0 +1,15 @@
+# home di siacbatch
+MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
+JAVA_HOME=${vm.java_home.path}
+
+# setup delle variabili
+CODICE_LINEA_CLIENTE=$1
+CODICE_ENTE=$2
+JSON_FILE=$3
+
+
+$JAVA_HOME/bin/java -cp .:$MYHOME/config/$CODICE_LINEA_CLIENTE:$MYHOME/lib/siacbatch.jar    \
+        it.csi.siac.siacbatch.main.SiacBatchLauncher \
+   --batch DURC                                                        \
+   --codice_ente $CODICE_ENTE                                        \
+   --json $JSON_FILE                                                     

@@ -1,0 +1,85 @@
+<!--
+SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
+SPDX-License-Identifier: EUPL-1.2
+-->
+<ivy-module version="2.0">
+  <info organisation="csipiemonte" module="siacbatch" />
+  <configurations>
+    	<conf name="runtime"  description="required for execution" />
+    	<conf name="provided" description="the JDK or a container are expected to provide the dependency at runtime" />
+    	<conf name="compile"  description="required for compilation of the application classes" extends="runtime, provided" />
+    	<conf name="test"     description="required for junit testing" />
+    	<conf name="src"      description="dependencies sources" />
+    	<conf name="dev"      description="required for source generation" />
+  </configurations>
+    
+  <!-- ############################################################## -->
+  <!-- # RUNTIME                                                    # -->
+  <!-- ############################################################## -->
+  <!--  -->
+  <dependencies>
+    <dependency org="others" name="aopalliance" rev="1.0.0" transitive="false" conf="runtime->default"/>
+
+
+    <dependency org="apache" name="commons-lang" rev="2.6"  transitive="false" conf="runtime->default"/>
+<dependency org="apache" name="commons-lang3" 	 rev="3.1" 	  transitive="false" conf="runtime->default" />
+    <dependency org="apache" name="commons-logging" rev="1.1.1"  transitive="false" conf="runtime->default"/>
+
+    <dependency org="apache" name="commons-collections" rev="3.2.1"  transitive="false" conf="runtime->default"/>
+    <dependency org="apache" name="commons-lang" rev="2.6"  transitive="false" conf="runtime->default"/>
+    <dependency org="apache" name="commons-cli" rev="1.2"  transitive="false" conf="runtime->default"/>
+    <dependency org="apache" name="commons-io" rev="2.1"  transitive="false" conf="runtime->default"/>
+    <dependency org="apache" name="httpclient" rev="4.5.2"  transitive="false" conf="runtime->default"/>
+    <dependency org="apache" name="httpcore" rev="4.4.4"  transitive="false" conf="runtime->default"/>
+    <dependency org="apache" name="httpmime" rev="4.5.2"  transitive="false" conf="runtime->default"/>
+
+
+    <dependency org="others" name="jboss" rev="eap-6.0" transitive="false" conf="runtime->default">
+     	<artifact name="hibernate-jpa-2.0-api-1.0.1.Final-redhat-1" type="jar" />
+    </dependency>
+
+
+	<dependency org="apache" name="commons-pool" rev="1.5.2"  transitive="false" conf="runtime->default"/>
+	<dependency org="apache" name="commons-dbcp" rev="1.2.2"  transitive="false" conf="runtime->default"/>
+	<dependency org="postgresql" name="postgresql-jdbc" rev="9.1-903.jdbc4"  transitive="false" conf="runtime->default"/>
+	
+    
+    <!-- ############################################################## -->
+    <!-- # SPRING                                                     # -->
+    <!-- ############################################################## -->
+    <!--  -->
+    <dependency org="others" name="spring" rev="3.1.1.RELEASE" transitive="false" conf="runtime->default">
+      <artifact name="spring-aop-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-asm-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-beans-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-context-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-core-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-expression-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-jdbc-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-orm-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-tx-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-web-3.1.1.RELEASE" type="jar" />
+      <artifact name="spring-webmvc-3.1.1.RELEASE" type="jar" />
+    </dependency>
+    
+    <dependency org="others" name="spring-data-commons-core" rev="1.4.0.RELEASE" transitive="false" conf="runtime->default"/>
+    
+ 
+    <dependency org="apache" name="log4j" rev="1.2.15" transitive="false" conf="runtime->default"/>
+
+    
+    <dependency org="csipiemonte" name="siac-coritf" rev="4.6.0" changing="true" transitive="false" conf="runtime->default" />
+  	<dependency org="csipiemonte" name="siac-bilitf" rev="4.18.0" changing="true"  transitive="false" conf="runtime->default"/>
+	<dependency org="csipiemonte" name="siac-common" rev="4.8.0" changing="true"  transitive="false" conf="runtime->default"/>
+	
+	
+	
+	
+    <dependency org="others" name="junit" rev="4.12" transitive="false" conf="runtime->default" />
+	
+	<dependency org="codehaus" name="jackson" rev="1.9.8" transitive="false" conf="runtime->default" />
+   
+
+
+  </dependencies>
+</ivy-module>

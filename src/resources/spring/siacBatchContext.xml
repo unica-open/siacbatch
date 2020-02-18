@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
+SPDX-License-Identifier: EUPL-1.2
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	    http://www.springframework.org/schema/util
+	    http://www.springframework.org/schema/util/spring-util.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+		
+
+<context:annotation-config/> 
+
+	<context:component-scan base-package="it.csi.siac.siacbatch, it.csi.siac.siaccorser, it.csi.siac.siacbilser" />
+
+   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="${datasource.url}"/>
+        <property name="username" value="${datasource.username}"/>
+        <property name="password" value="${datasource.password}"/>
+   </bean>
+
+  <util:map id="jaxwsCustomProperties">
+        <entry key="com.sun.xml.ws.request.timeout">
+            <value type="java.lang.Integer">1200000</value>
+        </entry>
+        <entry key="com.sun.xml.ws.connect.timeout">
+            <value type="java.lang.Integer">1200000</value>
+        </entry>
+    </util:map>
+
+
+	<bean id="pccService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="it.csi.siac.pcc.frontend.webservice.PCCService" />
+        <property name="wsdlDocumentUrl" value="${endpoint.url.service.bil}/PCCService?wsdl" />
+        <property name="namespaceUri" value="http://siac.csi.it/pcc/svc/1.0" /> 
+        <property name="serviceName" value="PCCService" />
+        <property name="endpointAddress" value="${endpoint.url.service.bil}/PCCService" />
+        
+     	<property name="customProperties" ref="jaxwsCustomProperties"/>
+        
+        
+        <property name="lookupServiceOnStartup" value="false" /> 
+    </bean>
+	
+	<bean id="oilService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="it.csi.siac.siacfinser.frontend.webservice.OilService" />
+        <property name="wsdlDocumentUrl" value="${endpoint.url.service.fin}/OilService?wsdl" />
+        <property name="namespaceUri" value="http://siac.csi.it/fin/svc/1.0" /> 
+        <property name="serviceName" value="OilService" />
+        <property name="endpointAddress" value="${endpoint.url.service.fin}/OilService" />
+        <property name="lookupServiceOnStartup" value="false" /> 
+    </bean>
+	
+    <bean id="emissioneOrdinativiService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="it.csi.siac.siacfin2ser.frontend.webservice.EmissioneOrdinativiService" />
+        <property name="wsdlDocumentUrl" value="${endpoint.url.service.bil}/EmissioneOrdinativiService?wsdl" />
+        <property name="namespaceUri" value="http://siac.csi.it/fin2/svc/1.0" />
+        <property name="serviceName" value="EmissioneOrdinativiService" />
+        <property name="endpointAddress" value="${endpoint.url.service.bil}/EmissioneOrdinativiService" />
+        <property name="lookupServiceOnStartup" value="false" />
+    </bean>
+
+	<bean id="coreService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface" value="it.csi.siac.siaccorser.frontend.webservice.CoreService" />
+		<property name="wsdlDocumentUrl" value="${endpoint.url.service.core}/CoreService?wsdl" />
+		<property name="namespaceUri" value="http://siac.csi.it/cor/svc/1.0" />
+		<property name="serviceName" value="CoreService" />
+		<property name="endpointAddress" value="${endpoint.url.service.core}/CoreService" />
+		 <property name="lookupServiceOnStartup" value="false" /> 
+	</bean>
+	
+
+
+	<bean id = "baseOilUniItBatchConfig" abstract = "true">
+	     <property name="keyStorePath" value="${oil.uniit.keyStore.path}"/>
+	     <property name="keyStorePassword" value="${oil.uniit.keyStore.password}"/>
+	     <property name="certPassword" value="${oil.uniit.cert.password}"/>
+	</bean>
+   
+   
+	<bean id="oilUniItCaricoFlussiBatchConfig" parent="baseOilUniItBatchConfig"  class="it.csi.siac.siacbatch.batch.oil.uniit.caricoflussi.OilUniItCaricoFlussiBatchConfig" >
+		<property name="url" value="https://${oil.uniit.caricoflussi.host}/rest/flussi/%s" />
+	</bean>
+
+	<bean id="oilUniItRicevuteBatchConfig"  parent="baseOilUniItBatchConfig" class="it.csi.siac.siacbatch.batch.oil.uniit.ricevute.OilUniItRicevuteBatchConfig"  >
+ 		<property name="urlPattern" value="https://${oil.uniit.ricevute.host}/rest/ricevute-sistema-contabile/%s?da=%s&amp;a=%s" /> 
+
+	</bean>     
+
+
+
+	<bean id="pagoPAService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="it.csi.siac.pagopa.frontend.webservice.PagoPAService" />
+        <property name="wsdlDocumentUrl" value="${endpoint.url.service.bil}/PagoPAService?wsdl" />
+        <property name="namespaceUri" value="http://siac.csi.it/pagopa/svc/1.0" /> 
+        <property name="serviceName" value="PagoPAService" />
+        <property name="endpointAddress" value="${endpoint.url.service.bil}/PagoPAService" />
+        <property name="lookupServiceOnStartup" value="false" /> 
+    </bean>
+	
+
+
+
+	<bean id="soggettoService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="it.csi.siac.siacfinser.frontend.webservice.SoggettoService" />
+        <property name="wsdlDocumentUrl" value="${endpoint.url.service.fin}/SoggettoService?wsdl" />
+        <property name="namespaceUri" value="http://siac.csi.it/fin/svc/1.0" /> 
+        <property name="serviceName" value="SoggettoService" />
+        <property name="endpointAddress" value="${endpoint.url.service.fin}/SoggettoService" />
+        <property name="lookupServiceOnStartup" value="false" /> 
+    </bean>
+	
+	
+     <context:property-placeholder 
+     	location="classpath:/datasource.properties,
+     			  classpath:/endpoint.properties,
+     			  classpath:/uniit.properties"
+     /> 
+
+
+
+
+</beans>

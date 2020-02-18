@@ -1,0 +1,14 @@
+# home di siacbatch
+MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
+JAVA_HOME=${vm.java_home.path}
+
+CODICE_LINEA_CLIENTE=$1
+CODICE_ENTE=$2
+
+
+$JAVA_HOME/bin/java -Dhttps.proxyHost=proxy-srv.csi.it \
+                    -Dhttps.proxyPort=3128  \
+                    -cp .:$MYHOME/config/$CODICE_LINEA_CLIENTE:$MYHOME/lib/siacbatch.jar  \
+        it.csi.siac.siacbatch.main.SiacBatchLauncher \
+        --batch PAGOPA \
+        --codice_ente CODICE_ENTE

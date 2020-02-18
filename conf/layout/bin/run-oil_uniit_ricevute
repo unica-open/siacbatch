@@ -1,0 +1,23 @@
+# home di siacbatch
+MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
+JAVA_HOME=${vm.java_home.path}
+
+# setup delle variabili
+CODICE_LINEA_CLIENTE=$1
+CODICE_ENTE=$2
+TIPO=$3
+DATA=$4
+FOLDER=$5
+
+mkdir -p $FOLDER
+
+$JAVA_HOME/bin/java  -Dhttps.proxyHost=proxy-srv.csi.it -Dhttps.proxyPort=3128 \
+    -cp .:$MYHOME/config/$CODICE_LINEA_CLIENTE:$MYHOME/lib/siacbatch.jar    \
+           it.csi.siac.siacbatch.main.SiacBatchLauncher                 \
+   --batch OIL_UNIIT_RICEVUTE                                        \
+   --codice_ente $CODICE_ENTE                                        \
+   --tipo $TIPO                                        \
+   --data $DATA                                        \
+   --path $FOLDER
+   
+   
