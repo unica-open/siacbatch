@@ -6,7 +6,7 @@ The original copyright notice and the license, under which CSI-Piemonte received
 are set forth below. You can find the original source code at the link set hereafter.
 Please refer to the accompanying credits file for additional notices.
 
-[Apache 2.0](../lib/third-party-licenses/APACHE%202.0-LICENSE.txt)\
+[Apache 2.0](https://github.com/unica-open/contabilia/blob/master/third-party-licenses/APACHE%202.0-LICENSE.txt) \
 commons-cli,1.2\
 commons-collections,3.2.1\
 commons-dbcp,1.2.2\
@@ -35,11 +35,11 @@ spring-tx,3.1.1.RELEASE\
 spring-web,3.1.1.RELEASE\
 spring-webmvc,3.1.1.RELEASE
 
-[Eclipse Public License 1.0](../lib/third-party-licenses/EPL%201.0-LICENSE.txt)\
+[Eclipse Public License 1.0](https://github.com/unica-open/contabilia/blob/master/third-party-licenses/EPL%201.0-LICENSE.txt) \
 hibernate-jpa-2.0-api,1.0.1.Final-redhat-1\
 junit,4.12
 
-[PostgreSQL License](../lib/third-party-licenses/POSTGRESQL-LICENSE.txt)\
+[PostgreSQL License](https://github.com/unica-open/contabilia/blob/master/third-party-licenses/POSTGRESQL-LICENSE.txt) \
 postgresql,9.4-1201.jdbc4
 
 Public Domain\
