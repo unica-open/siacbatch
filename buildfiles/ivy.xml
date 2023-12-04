@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!--
 SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
 SPDX-License-Identifier: EUPL-1.2
@@ -12,6 +13,8 @@ SPDX-License-Identifier: EUPL-1.2
     	<conf name="src"      description="dependencies sources" />
     	<conf name="dev"      description="required for source generation" />
   </configurations>
+    
+    
     
   <!-- ############################################################## -->
   <!-- # RUNTIME                                                    # -->
@@ -41,7 +44,7 @@ SPDX-License-Identifier: EUPL-1.2
 
 	<dependency org="apache" name="commons-pool" rev="1.5.2"  transitive="false" conf="runtime->default"/>
 	<dependency org="apache" name="commons-dbcp" rev="1.2.2"  transitive="false" conf="runtime->default"/>
-	<dependency org="postgresql" name="postgresql-jdbc" rev="9.1-903.jdbc4"  transitive="false" conf="runtime->default"/>
+	<dependency org="postgresql" name="postgresql-jdbc" rev="9.4-1201.jdbc4"  transitive="false" conf="runtime->default"/>
 	
     
     <!-- ############################################################## -->
@@ -68,17 +71,19 @@ SPDX-License-Identifier: EUPL-1.2
     <dependency org="apache" name="log4j" rev="1.2.15" transitive="false" conf="runtime->default"/>
 
     
-    <dependency org="csipiemonte" name="siac-coritf" rev="4.6.0" changing="true" transitive="false" conf="runtime->default" />
-  	<dependency org="csipiemonte" name="siac-bilitf" rev="4.18.0" changing="true"  transitive="false" conf="runtime->default"/>
-	<dependency org="csipiemonte" name="siac-common" rev="4.8.0" changing="true"  transitive="false" conf="runtime->default"/>
-	
-	
-	
+    <dependency org="csipiemonte" name="siac-coritf" rev="5.15.0"  transitive="true" conf="runtime->default" />
+    <dependency org="csipiemonte" name="siac-bilitf" rev="5.18.0"  transitive="true" conf="runtime->default" />
+
+	<dependency org="csipiemonte" name="siac-common"    rev="5.15.0" conf="runtime->default"/>
+	<dependency org="csipiemonte" name="siac-commonser" rev="5.9.0" conf="runtime->default"/>
+
+   
 	
     <dependency org="others" name="junit" rev="4.12" transitive="false" conf="runtime->default" />
-	
-	<dependency org="codehaus" name="jackson" rev="1.9.8" transitive="false" conf="runtime->default" />
    
+
+	<dependency org="codehaus" name="jackson" rev="1.9.8" transitive="false" conf="runtime->default" />
+
 
 
   </dependencies>

@@ -1,6 +1,10 @@
+#SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
+#SPDX-License-Identifier: EUPL-1.2
 # home di siacbatch
 MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
+###
 JAVA_HOME=${vm.java_home.path}
+#
 
 # setup delle variabili
 CODICE_LINEA_CLIENTE=$1

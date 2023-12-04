@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!--
 SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
 SPDX-License-Identifier: EUPL-1.2
@@ -46,9 +47,7 @@ SPDX-License-Identifier: EUPL-1.2
     <!-- ############################################################# -->
     <!-- -->
     <target name="default"
-            description="verifica se eseguire il build per un solo environment specificato a linea di commando con -Dtarget=${target} o per tutti gli environment "
-    	depends="init, replace-placeholders">
-    	
+            description="verifica se eseguire il build per un solo environment specificato a linea di commando con -Dtarget=${target} o per tutti gli environment ">
         <condition property="first-call" value="distribution">
             <not>
                 <equals arg1="${target}" arg2="$${target}"/>
@@ -112,15 +111,13 @@ SPDX-License-Identifier: EUPL-1.2
         <!-- -->
         <property name="dist-target" value="${dist}/${target}"/>
         <property name="archives-target" value="${archives}/${target}"/>
-    	
-        <!--<property name="temp-target" value="${temp}/${target}"/>-->
-    	
-        <property name="conf-target" value="${temp}/conf"/>
+        <property name="temp-target" value="${temp}/${target}"/>
+        <property name="conf-target" value="${temp-target}/conf"/>
         <!-- -->
         <!-- property name="classes" value="${temp-target}/classes" /-->
         <!-- -->
         <!-- -->
-        <property name="manifest-dir" value="${temp}/manifests"/>
+        <property name="manifest-dir" value="${temp-target}/manifests"/>
         <!-- -->
         <property name="jar-manifest-dir" value="${manifest-dir}/jar"/>
         <property name="ear-manifest-dir" value="${manifest-dir}/ear"/>
@@ -148,7 +145,7 @@ SPDX-License-Identifier: EUPL-1.2
             depends="init">
         <delete dir="${temp}"/>
         <mkdir dir="${dist-target}"/>
-        <mkdir dir="${temp}"/>
+        <mkdir dir="${temp-target}"/>
         <mkdir dir="${classes}"/>
         <mkdir dir="${archives-target}"/>
     </target>
@@ -159,7 +156,7 @@ SPDX-License-Identifier: EUPL-1.2
     <!-- ############################################################# -->
     <!-- -->
     <target name="_check-source-uptodate" description="verifica se sono stati modificati sorgenti">
-        <uptodate property="source.uptodate" targetfile="${temp}/src-timestamp-file.txt">
+        <uptodate property="source.uptodate" targetfile="${temp-target}/src-timestamp-file.txt">
             <srcfiles dir="${src-java}">
                 <include name="**/*.java"/>
             </srcfiles>
@@ -174,7 +171,7 @@ SPDX-License-Identifier: EUPL-1.2
     <!-- da reintegrare in Csi load-dependencies, -->
     <target name="compile-all" description="Compila tutti i sorgenti."
             depends="init, load-dependencies, _create-tree-structure, process-resources">
-        <touch file="${temp}/src-timestamp-file.txt"/>
+        <touch file="${temp-target}/src-timestamp-file.txt"/>
         <!-- -->
         <echo message="JAVA_HOME: ${env.JAVA_HOME}"/>
 
@@ -340,8 +337,7 @@ SPDX-License-Identifier: EUPL-1.2
     <!-- -->
     <target name="package-jar" description="costruisce il jar dell'itf"
             depends="compile-all, replace-placeholders, _create-manifests">
-       
-    	<delete dir="${archives-target}/${web-module-name}.jar" failonerror="false"/>
+        <delete dir="${archives-target}/${web-module-name}.jar" failonerror="false"/>
 
 <!--    	
         <copy todir="${classes}/spring" file="${buildfiles}/${target}.properties">
@@ -425,10 +421,10 @@ SPDX-License-Identifier: EUPL-1.2
 	            <tarfileset dir="${build.lib}/runtime" includes="*.jar" prefix="lib"/>
 	            <tarfileset dir="${conf-target}/linea_cliente/" prefix="config" includes="**/*"/>
 				<tarfileset dir="${conf-target}/layout/bin" filemode="774" prefix='bin'/>
-				<!--
-				<tarfileset dir="${basedir}/conf/layout/" excludes='bin/*'/>
+			<!--
+	        	<tarfileset dir="${basedir}/conf/layout/" excludes='bin/*'/>
 	            <tarfileset dir="${basedir}/conf/layout/bin" filemode="774" prefix='bin'/>
-				-->
+	        -->
 	        </tar>
 			
 			<move

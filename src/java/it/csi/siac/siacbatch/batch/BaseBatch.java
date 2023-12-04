@@ -17,6 +17,8 @@ import it.csi.siac.siacbatch.main.BatchClassEnum;
 import it.csi.siac.siacbatch.util.LogHandler;
 import it.csi.siac.siaccorser.frontend.webservice.msg.GetRichiedente;
 import it.csi.siac.siaccorser.frontend.webservice.msg.GetRichiedenteResponse;
+import it.csi.siac.siaccorser.frontend.webservice.msg.RicercaBilancio;
+import it.csi.siac.siaccorser.model.Bilancio;
 import it.csi.siac.siaccorser.model.Richiedente;
 
 public abstract class BaseBatch implements Batch
@@ -25,6 +27,7 @@ public abstract class BaseBatch implements Batch
 	protected CoreServiceInvoker coreServiceInvoker;
 	
 	private CommandLine commandLine;
+	private int exitCode = 0;
 
 	@Override
 	public void execute(String batchName, String[] commandLineArgs) throws Exception
@@ -39,7 +42,7 @@ public abstract class BaseBatch implements Batch
 			execute();
 		}
 		
-		LogHandler.logInfo("Fine batch " + batchName);
+		LogHandler.logInfo(String.format("Fine batch %s (%d)", batchName, exitCode));
 	}
 
 	private boolean executeTest() throws Exception {
@@ -104,6 +107,19 @@ public abstract class BaseBatch implements Batch
 		return commandLine.getOptionValues(opt);
 	}
 
+//	protected final Bilancio readBilancio(Integer anno) throws Exception
+//	{
+//		RicercaBilancio ricercaBilancio = new RicercaBilancio();
+//
+//		LogHandler.logInfo("Chiamata coreService.ricercaBilancio()");
+//
+//		RicercaBilancioResponse getrRichiedenteResponse = coreServiceInvoker.getRichiedente(getRichiedente);
+//
+//		Richiedente richiedente = getrRichiedenteResponse.getRichiedente();
+//		return richiedente;
+//	}
+//
+
 	protected final Richiedente readRichiedente(String codiceEnte) throws Exception
 	{
 		GetRichiedente getRichiedente = new GetRichiedente();
@@ -115,5 +131,13 @@ public abstract class BaseBatch implements Batch
 
 		Richiedente richiedente = getrRichiedenteResponse.getRichiedente();
 		return richiedente;
+	}
+
+	public int getExitCode() {
+		return exitCode;
+	}
+
+	public void setExitCode(int exitCode) {
+		this.exitCode = exitCode;
 	}
 }

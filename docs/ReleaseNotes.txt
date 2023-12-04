@@ -2,6 +2,8 @@
 SIAC Batch
 ------------------------
 
+
+
 Funzionalità rilasciate
 --------------------------
 build 27/11/2019 versione 4.5.0

@@ -1,8 +1,18 @@
+#SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
+#SPDX-License-Identifier: EUPL-1.2
 # home di siacbatch
 MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
-JAVA_HOME=${vm.java_home.path}
+JAVA_HOME=/opt/jdk1.8.0_112
 
 CODICE_LINEA_CLIENTE=$1
+
+
+echo Testing endpoints:
+grep -E "^[^#]" $MYHOME/config/$CODICE_LINEA_CLIENTE/endpoint.properties | while read line
+do
+  url="$(cut -d= -f2 <<<$line)/"
+  echo $(cut -d= -f1 <<<$line): $url '->' $(curl -so /dev/null -w '%{response_code}' $url)
+done
 
 $JAVA_HOME/bin/java -cp .:$MYHOME/config/$CODICE_LINEA_CLIENTE:$MYHOME/lib/siacbatch.jar    \
         it.csi.siac.siacbatch.main.SiacBatchLauncher \

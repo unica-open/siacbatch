@@ -51,11 +51,112 @@ public abstract class BaseOilUniItBatch<CONF extends BaseOilUniItBatchConfig> ex
 			instream.close();
 		}
 
+		
+		
+		
+		
+		
+		
+//		
+//		for (Provider provider: Security.getProviders()) {
+//			  System.out.println(provider.getName());
+//			  for (String key: provider.stringPropertyNames())
+//			    System.out.println("\t" + key + "\t" + provider.getProperty(key));
+//			}
+		
+//		SSLSocketFactory socketFactory = SSLContext.getDefault().getSocketFactory();
+//		for (String cipherSuite : socketFactory.getSupportedCipherSuites()) {
+//		    System.out.println(cipherSuite);
+//		}
+		
 		SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, config.getCertPassword().toCharArray()).build();
 		
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" },
 				// null,
-				new String[] { "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA" },
+				new String[] {
+//						"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+//						"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+//						"TLS_RSA_WITH_AES_256_CBC_SHA256",
+//						"TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384",
+//						"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384",
+//						"TLS_DHE_RSA_WITH_AES_256_CBC_SHA256",
+//						"TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+//						"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+//						"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+//						"TLS_RSA_WITH_AES_256_CBC_SHA",
+//						"TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA",
+//						"TLS_ECDH_RSA_WITH_AES_256_CBC_SHA",
+//						"TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+//						"TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
+//						"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+//						"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+//						"TLS_RSA_WITH_AES_128_CBC_SHA256",
+//						"TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256",
+//						"TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256",
+//						"TLS_DHE_RSA_WITH_AES_128_CBC_SHA256",
+//						"TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
+//						"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+//						"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+//						"TLS_RSA_WITH_AES_128_CBC_SHA",
+//						"TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA",
+//						"TLS_ECDH_RSA_WITH_AES_128_CBC_SHA",
+//						"TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+//						"TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+//						"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+//						"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+						"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+//						"TLS_RSA_WITH_AES_256_GCM_SHA384",
+//						"TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384",
+//						"TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384",
+//						"TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+//						"TLS_DHE_DSS_WITH_AES_256_GCM_SHA384",
+//						"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+//						"TLS_RSA_WITH_AES_128_GCM_SHA256",
+//						"TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256",
+//						"TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256",
+//						"TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+//						"TLS_DHE_DSS_WITH_AES_128_GCM_SHA256",
+//						"TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA",
+//						"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA",
+//						"SSL_RSA_WITH_3DES_EDE_CBC_SHA",
+//						"TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA",
+//						"TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA",
+//						"SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA",
+//						"SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+//						"TLS_EMPTY_RENEGOTIATION_INFO_SCSV",
+//						"TLS_DH_anon_WITH_AES_256_GCM_SHA384",
+//						"TLS_DH_anon_WITH_AES_128_GCM_SHA256",
+//						"TLS_DH_anon_WITH_AES_256_CBC_SHA256",
+//						"TLS_ECDH_anon_WITH_AES_256_CBC_SHA",
+//						"TLS_DH_anon_WITH_AES_256_CBC_SHA",
+//						"TLS_DH_anon_WITH_AES_128_CBC_SHA256",
+//						"TLS_ECDH_anon_WITH_AES_128_CBC_SHA",
+//						"TLS_DH_anon_WITH_AES_128_CBC_SHA",
+//						"TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA",
+//						"SSL_DH_anon_WITH_3DES_EDE_CBC_SHA",
+//						"SSL_RSA_WITH_DES_CBC_SHA",
+//						"SSL_DHE_RSA_WITH_DES_CBC_SHA",
+//						"SSL_DHE_DSS_WITH_DES_CBC_SHA",
+//						"SSL_DH_anon_WITH_DES_CBC_SHA",
+//						"SSL_RSA_EXPORT_WITH_DES40_CBC_SHA",
+//						"SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA",
+//						"SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA",
+//						"SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA",
+//						"TLS_RSA_WITH_NULL_SHA256",
+//						"TLS_ECDHE_ECDSA_WITH_NULL_SHA",
+//						"TLS_ECDHE_RSA_WITH_NULL_SHA",
+//						"SSL_RSA_WITH_NULL_SHA",
+//						"TLS_ECDH_ECDSA_WITH_NULL_SHA",
+//						"TLS_ECDH_RSA_WITH_NULL_SHA",
+//						"TLS_ECDH_anon_WITH_NULL_SHA",
+//						"SSL_RSA_WITH_NULL_MD5",
+//						"TLS_KRB5_WITH_3DES_EDE_CBC_SHA",
+//						"TLS_KRB5_WITH_3DES_EDE_CBC_MD5",
+//						"TLS_KRB5_WITH_DES_CBC_SHA",
+//						"TLS_KRB5_WITH_DES_CBC_MD5",
+//						"TLS_KRB5_EXPORT_WITH_DES_CBC_40_SHA",
+//						"TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5"
+						},
 				SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 		
 		HttpClientBuilder httpClientBuilder = HttpClients.custom();
@@ -74,3 +175,17 @@ public abstract class BaseOilUniItBatch<CONF extends BaseOilUniItBatchConfig> ex
 	}
 	
 }
+
+
+
+
+
+
+
+/*   
+
+for i in $(openssl ciphers 'ALL:eNULL' | sed -e 's/:/ /g') ; do echo $i ; openssl s_client -cipher "$i" -connect ordinativo-pre.argentea.it:443  ; done | less
+
+
+
+*/

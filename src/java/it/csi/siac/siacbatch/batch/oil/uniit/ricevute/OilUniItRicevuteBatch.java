@@ -93,7 +93,9 @@ public class OilUniItRicevuteBatch extends BaseOilUniItBatch<OilUniItRicevuteBat
 				} else {
 					LogHandler.logInfo(String.format("Nessun file scaricato per l'ente %s con data %s", codiceEnte, data));
 				}
-	        } 
+	        } else {
+	        	setExitCode(1);
+	        }
 		} finally {
 			IOUtils.closeQuietly(response);
 			IOUtils.closeQuietly(httpClient);

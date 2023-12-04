@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 import it.csi.siac.siacbatch.batch.BaseBatch;
 import it.csi.siac.siacbatch.batch.CmdLineOptions;
 import it.csi.siac.siacbatch.util.LogHandler;
-import it.csi.siac.siaccommon.util.date.DateConverter;
+import it.csi.siac.siaccommon.util.date.DateUtil;
 import it.csi.siac.siaccorser.model.Richiedente;
-import it.csi.siac.siacfinser.Constanti;
+import it.csi.siac.siacfinser.CostantiFin;
 import it.csi.siac.siacfinser.frontend.webservice.msg.AggiornaDatiDurcSoggetto;
 import it.csi.siac.siacfinser.frontend.webservice.msg.RicercaSoggettiOttimizzato;
 import it.csi.siac.siacfinser.frontend.webservice.msg.RicercaSoggettiOttimizzatoResponse;
@@ -46,7 +46,7 @@ public class DurcBatch extends BaseBatch
 		richiedente = readRichiedente(codiceEnte);
 		
 		for (Fornitore fornitore : fornitori) {
-		//	LogHandler.logInfo(CoreUtils.objectToString(fornitore));
+		//	LogHandler.logInfo(CoreUtil.objectToString(fornitore));
 			elaboraFornitore(fornitore);
 		}
 	}
@@ -81,7 +81,7 @@ public class DurcBatch extends BaseBatch
 		RicercaSoggettiOttimizzato req = new RicercaSoggettiOttimizzato();
 		req.setRichiedente(richiedente);
 		req.setEnte(richiedente.getAccount().getEnte());
-		req.setCodiceAmbito(Constanti.AMBITO_FIN);
+		req.setCodiceAmbito(CostantiFin.AMBITO_FIN);
 		req.setSorgenteDatiSoggetto(SorgenteDatiSoggetto.SIAC);
 		
 		ParametroRicercaSoggetto parametroRicercaSoggetto = new ParametroRicercaSoggetto();
@@ -110,10 +110,7 @@ public class DurcBatch extends BaseBatch
 		req.setRichiedente(richiedente);
 		req.setIdSoggetto(soggetto.getUid());
 		req.setTipoFonteDurc(TipoFonteDurc.AUTOMATICA.getCodice());
-		req.setDataFineValiditaDurc(fornitore.getDataScadenzaDoc() == null ? 
-				null :
-				DateConverter.convertFromString(fornitore.getDataScadenzaDoc())
-		);
+		req.setDataFineValiditaDurc(DateUtil.parseDate(fornitore.getDataScadenzaDoc()));
 		req.setFonteDurcAutomatica("Albo Fornitori");
 
 		durcServiceInvoker.aggiornaDatiDurcSoggetto(req);

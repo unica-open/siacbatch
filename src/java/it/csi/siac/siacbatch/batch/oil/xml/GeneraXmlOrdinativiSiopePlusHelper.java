@@ -5,6 +5,7 @@
 package it.csi.siac.siacbatch.batch.oil.xml;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,31 +31,41 @@ public class GeneraXmlOrdinativiSiopePlusHelper extends BaseGeneraXmlOrdinativiH
 		req.setLimitOrdinativi(limitOrdinativi);
 		req.setRichiedente(richiedente);
 
-		Map<Integer, Integer> countOrdinativiPerAnno = readCountOrdinativiMifPerAnnoEsercizio(idElaborazione,
+		Map<Integer, String> countOrdinativiPerAnnoCodiceIstat = readCountOrdinativiMifPerAnnoEsercizio(idElaborazione,
 				richiedente);
 
-		for (Entry<Integer, Integer> entry : countOrdinativiPerAnno.entrySet())
-		{
-			Integer annoEsercizio = entry.getKey();
-			Integer countOrdinativi = entry.getValue();
+		for (Entry<Integer, String> eae : countOrdinativiPerAnnoCodiceIstat.entrySet()) {
+			
+			Integer annoEsercizio = eae.getKey();
 
 			req.setAnnoEsercizio(annoEsercizio);
+			
+			int j = 0;
 
-			int steps = (countOrdinativi - 1) / limitOrdinativi + 1;
+			for (String cin : StringUtils.split(eae.getValue(), ",")) {
 
-			for (int i = 0; i < steps; i++)
-			{
-				String xml = generaXmlOrdinativi(req, i * limitOrdinativi);
+				String[] tmp = StringUtils.split(cin, "=");
+				String codiceIstat = tmp[0];
+				Integer countOrdinativi = Integer.parseInt(tmp[1]);
 
-				String xmlFileName = String.format("%s.%d.%s.xml", xmlFilePrefix, annoEsercizio,
-						StringUtils.leftPad(String.valueOf(i + 1), 5, '0'));
+				req.setCodiceIstat(codiceIstat);
 
-				FileUtils.writeStringToFile(new File(xmlPathFile + xmlFileName), xml);
+				int steps = (countOrdinativi - 1) / limitOrdinativi + 1;
+	
+				for (int i = 0; i < steps; i++)
+				{
+					String xml = generaXmlOrdinativi(req, i * limitOrdinativi);
+	
+					String xmlFileName = String.format("%s.%d.%s.xml", xmlFilePrefix, annoEsercizio,
+							StringUtils.leftPad(String.valueOf(j++ + 1), 5, '0'));
+	
+					FileUtils.writeStringToFile(new File(xmlPathFile + xmlFileName), xml);
+				}
 			}
 		}
 	}
 
-	private Map<Integer, Integer> readCountOrdinativiMifPerAnnoEsercizio(Integer idElaborazione,
+	private Map<Integer, String> readCountOrdinativiMifPerAnnoEsercizio(Integer idElaborazione,
 			Richiedente richiedente) throws Exception
 	{
 		CountOrdinativiMif req = new CountOrdinativiMif();
@@ -64,7 +75,7 @@ public class GeneraXmlOrdinativiSiopePlusHelper extends BaseGeneraXmlOrdinativiH
 
 		CountOrdinativiMifSiopePlusResponse res = oilServiceInvoker.countOrdinativiMifSiopePlus(req);
 
-		return res.getNumeroOrdinativiPerAnnoEsercizio();
+		return res.getNumeroOrdinativiPerAnnoEsercizioCodiceIstat();
 	}
 
 }

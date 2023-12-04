@@ -7,4 +7,5 @@ package it.csi.siac.siacbatch.batch;
 public interface Batch
 {
 	public void execute(String batchName, String[] args) throws Exception;
+	public int getExitCode();
 }

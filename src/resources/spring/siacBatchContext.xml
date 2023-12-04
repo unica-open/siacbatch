@@ -97,16 +97,34 @@ SPDX-License-Identifier: EUPL-1.2
 
 
 
+  <util:map id="jaxwsCustomProperties_pagoPAService">
+        <entry key="com.sun.xml.ws.request.timeout">
+            <value type="java.lang.Integer">3600000</value>
+        </entry>
+        <entry key="com.sun.xml.ws.connect.timeout">
+            <value type="java.lang.Integer">3600000</value>
+        </entry>
+    </util:map>
+
 	<bean id="pagoPAService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
         <property name="serviceInterface" value="it.csi.siac.pagopa.frontend.webservice.PagoPAService" />
         <property name="wsdlDocumentUrl" value="${endpoint.url.service.bil}/PagoPAService?wsdl" />
         <property name="namespaceUri" value="http://siac.csi.it/pagopa/svc/1.0" /> 
         <property name="serviceName" value="PagoPAService" />
         <property name="endpointAddress" value="${endpoint.url.service.bil}/PagoPAService" />
+     	<property name="customProperties" ref="jaxwsCustomProperties_pagoPAService"/>
         <property name="lookupServiceOnStartup" value="false" /> 
     </bean>
 	
 
+	<bean id="iqs2Service" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="it.csi.siac.siacbilser.frontend.webservice.Iqs2Service" />
+        <property name="wsdlDocumentUrl" value="${endpoint.url.service.bil}/Iqs2Service?wsdl" />
+        <property name="namespaceUri" value="http://siac.csi.it/bil/svc/1.0" /> 
+        <property name="serviceName" value="Iqs2Service" />
+        <property name="endpointAddress" value="${endpoint.url.service.bil}/Iqs2Service" />
+        <property name="lookupServiceOnStartup" value="false" /> 
+    </bean>
 
 
 	<bean id="soggettoService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">

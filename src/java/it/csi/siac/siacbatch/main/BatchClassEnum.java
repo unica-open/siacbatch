@@ -11,6 +11,8 @@ import it.csi.siac.siacbatch.batch.abicab.AbiCabCmdLineOptions;
 import it.csi.siac.siacbatch.batch.durc.DurcBatch;
 import it.csi.siac.siacbatch.batch.durc.DurcCmdLineOptions;
 import it.csi.siac.siacbatch.batch.emettitore.EmettitoreBatch;
+import it.csi.siac.siacbatch.batch.iqs2.Iqs2Batch;
+import it.csi.siac.siacbatch.batch.iqs2.Iqs2CmdLineOptions;
 import it.csi.siac.siacbatch.batch.oil.uniit.caricoflussi.OilUniItCaricoFlussiBatch;
 import it.csi.siac.siacbatch.batch.oil.uniit.caricoflussi.OilUniItCaricoFlussiCmdLineOptions;
 import it.csi.siac.siacbatch.batch.oil.uniit.ricevute.OilUniItRicevuteBatch;
@@ -21,6 +23,8 @@ import it.csi.siac.siacbatch.batch.pagopa.PagoPABatch;
 import it.csi.siac.siacbatch.batch.pagopa.PagoPACmdLineOptions;
 import it.csi.siac.siacbatch.batch.pcc.PccBatch;
 import it.csi.siac.siacbatch.batch.pcc.PccCmdLineOptions;
+import it.csi.siac.siacbatch.batch.pulizia.PuliziaBatch;
+import it.csi.siac.siacbatch.batch.pulizia.PuliziaCmdLineOptions;
 import it.csi.siac.siacbatch.batch.test.TestBatch;
 
 public enum BatchClassEnum
@@ -30,8 +34,10 @@ public enum BatchClassEnum
 	OIL_UNIIT_RICEVUTE(OilUniItRicevuteBatch.class, OilUniItRicevuteCmdLineOptions.class),
 	ABI_CAB(AbiCabBatch.class, AbiCabCmdLineOptions.class), 
 	PCC(PccBatch.class, PccCmdLineOptions.class), 
+	PULIZIA(PuliziaBatch.class, PuliziaCmdLineOptions.class), 
 	EMETTITORE(EmettitoreBatch.class),
 	PAGOPA(PagoPABatch.class, PagoPACmdLineOptions.class),
+	IQS2(Iqs2Batch.class, Iqs2CmdLineOptions.class),
 	DURC(DurcBatch.class, DurcCmdLineOptions.class),
 	//
 	TEST(TestBatch.class);

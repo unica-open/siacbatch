@@ -23,24 +23,27 @@ public class SiacBatchLauncher
 
 	public static void main(String[] args) throws Exception
 	{
+		Batch batch = null;
+		
 		try
 		{
 			String batchName = getBatchName(args);
 
 			Class<? extends Batch> batchClass = BatchClassEnum.valueOf(batchName.toUpperCase()).getBatchClass();
 
-			if (batchClass != null)
-				appCtx.getBean(batchClass).execute(batchName, args);
-			else
+			if (batchClass != null) {
+				batch = appCtx.getBean(batchClass);
+				batch.execute(batchName, args);
+				exit(batch.getExitCode());
+			} else {
 				exitErr("Batch non valido");
+			}
 		}
 		catch (Throwable t)
 		{
 			t.printStackTrace();
 			exitErr(t.getMessage());
 		}
-
-		exit(0);
 	}
 
 	@SuppressWarnings("static-access")
@@ -54,6 +57,11 @@ public class SiacBatchLauncher
 	}
 
 	private static void exitErr(String message)
+	{
+		exitErr(message, 1);
+	}
+
+	private static void exitErr(String message, int exitCode)
 	{
 		LogHandler.logError("ERRORE: " + message);
 		exit(1);

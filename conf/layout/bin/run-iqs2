@@ -1,0 +1,19 @@
+#SPDX-FileCopyrightText: Copyright 2020 | CSI Piemonte
+#SPDX-License-Identifier: EUPL-1.2
+# home di siacbatch
+
+MYHOME="$( cd "$( dirname "${0}" )/.." && pwd )"
+JAVA_HOME=${vm.java_home.path}
+
+CODICE_LINEA_CLIENTE=$1
+CODICE_ENTE=$2
+FILE=$3
+
+
+$JAVA_HOME/bin/java -Dhttps.proxyHost=proxy-srv.csi.it \
+                    -Dhttps.proxyPort=3128  \
+                    -cp .:$MYHOME/config/$CODICE_LINEA_CLIENTE:$MYHOME/lib/siacbatch.jar  \
+        it.csi.siac.siacbatch.main.SiacBatchLauncher \
+        --batch IQS2 \
+        --codice_ente $CODICE_ENTE \
+        --FILE $FILE

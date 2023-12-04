@@ -44,8 +44,12 @@ public class OilUniItCaricoFlussiBatch extends BaseOilUniItBatch<OilUniItCaricoF
 			
 			String url = String.format(config.getUrl(), codiceEnte);
 			
+			
+			LogHandler.logInfo("URL = " + url);
 
 			HttpPost httpPost = new HttpPost(url);
+			
+			httpPost.addHeader("origin", "parsviluppi");
 			
 		    MultipartEntityBuilder builder = addFilesMultipart(filePath);
 		    
@@ -55,7 +59,7 @@ public class OilUniItCaricoFlussiBatch extends BaseOilUniItBatch<OilUniItCaricoF
 		 
 		    response = httpClient.execute(httpPost);
 		    
-		    LogHandler.logError("response: " + response.toString());
+		    LogHandler.logInfo("response: " + response.toString());
 
 		} finally {
 			IOUtils.closeQuietly(response);
